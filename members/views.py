@@ -6,4 +6,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def members(request):
-    return HttpResponse("Hello world! Saik")
+    return HttpResponse("Hello world! Rakib")
