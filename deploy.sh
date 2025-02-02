@@ -17,6 +17,6 @@ python manage.py collectstatic --noinput
 
 echo "Restarting Gunicorn..."
 pkill gunicorn
-./gunicorn_start.sh
+gunicorn --bind 0.0.0.0:8000 my_tennis_club.wsgi:application
 
 echo "Deployment completed!"
