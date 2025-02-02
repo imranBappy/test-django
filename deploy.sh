@@ -13,7 +13,7 @@ echo "Applying migrations..."
 python3 manage.py migrate
 
 echo "Collecting static files..."
-python manage.py collectstatic --noinput
+python3 manage.py collectstatic --noinput
 
 echo "Restarting Gunicorn..."
 pkill gunicorn
