@@ -19,5 +19,10 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           PEM_FILE: ${{ secrets.PEM_FILE }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i $PEM_FILE $EC2_USER@$EC2_HOST \
+          # Save PEM content to a private key file
+          echo "$PEM_FILE" > private_key.pem
+          chmod 400 private_key.pem
+
+          # SSH into the instance and run commands
+          ssh -o StrictHostKeyChecking=no -i private_key.pem $EC2_USER@$EC2_HOST \
             "cd /home/ubuntu/test-django && ./deploy.sh"
