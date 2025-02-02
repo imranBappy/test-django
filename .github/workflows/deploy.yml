@@ -1,0 +1,23 @@
+name: Deploy Django App
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          PEM_FILE: ${{ secrets.PEM_FILE }}
+        run: |
+          ssh -o StrictHostKeyChecking=no -i $PEM_FILE $EC2_USER@$EC2_HOST \
+            "cd /home/ubuntu/test-django && ./deploy.sh"
